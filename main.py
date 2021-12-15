@@ -1,31 +1,29 @@
 from flask import Flask, request
-import requests
+#import requests
 import json
 
 app = Flask(__name__)
 
-def msg_process(msg, tstamp):
+def notification_handler(msg):
     js = json.loads(msg)
-    msg = 'Region: {0} / Alarm: {1}'.format(
-        js['Region'], js['AlarmName']
-    )
-    # do stuff here, like calling your favorite SMS gateway API
+    print(js)
 
 @app.route('/', methods = ['GET', 'POST', 'PUT'])
 def sns():
     # AWS sends JSON with text/plain mimetype
     try:
-        js = json.loads(request.data)
+        data = json.loads(request.data)
     except:
         pass
-    print(request.data)
-    hdr = request.headers.get('X-Amz-Sns-Message-Type')
-    # subscribe to the SNS topic
-    if hdr == 'SubscriptionConfirmation' and 'SubscribeURL' in js:
-        r = requests.get(js['SubscribeURL'])
 
-    if hdr == 'Notification':
-        msg_process(js['Message'], js['Timestamp'])
+    header = request.headers.get('X-Amz-Sns-Message-Type')
+    print(header)
+    # # subscribe to the SNS topic
+    # if header == 'SubscriptionConfirmation' and 'SubscribeURL' in js:
+    #     r = requests.get(js['SubscribeURL'])
+
+    if header == 'Notification':
+        notification_handler(data['Message'])
 
     return 'OK\n'
 
