@@ -1,4 +1,5 @@
 from flask import Flask, request
+import subprocess
 #import requests
 import json
 
@@ -7,6 +8,7 @@ app = Flask(__name__)
 def notification_handler(msg):
     js = json.loads(msg)
     print(js)
+    subprocess.Popen("sudo aws s3 sync s3://log8415-projet /var/www/html/")
 
 @app.route('/', methods = ['GET', 'POST', 'PUT'])
 def sns():
