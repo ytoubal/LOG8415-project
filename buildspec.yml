@@ -1,0 +1,25 @@
+version: 0.2
+env:
+  variables:
+    BASE_FOLDER_PATH: "log8415-project"
+    S3_BUCKET: "s3://log8415-projet"
+    BUILD_FOLDER: "log8415-project/dist/log8415-project"
+    BUILD_ENV: "prod"
+phases:
+  install:
+    commands:
+      - echo Installing source NPM dependencies...
+      - cd ${BASE_FOLDER_PATH}
+      - npm install
+      - npm install -g @angular/cli
+  build:
+    commands:
+      - echo Build started on `date`
+      - ng build --${BUILD_ENV}
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+      files:
+        - '**/*'
+      base-directory: ${BUILD_FOLDER}
