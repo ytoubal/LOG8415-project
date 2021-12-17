@@ -2,7 +2,6 @@ version: 0.2
 env:
   variables:
     BASE_FOLDER_PATH: "log8415-project"
-    S3_BUCKET: "s3://log8415-projet"
     BUILD_FOLDER: "log8415-project/dist/log8415-project"
     BUILD_ENV: "prod"
 phases:
