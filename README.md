@@ -2,7 +2,7 @@
 
 ## Automated static website deployment with 3 steps CI/CD on S3 and EC2
 
-The goal of this project is to create a setup that will automatically validate and deploy the code from a code repository using a 3 steps pipeline. For the EC2 instances, a SNS service is used to notify the instances of a new build available and they will automatically retrieve the build from S3 and deploy it
+The goal of this project is to create a setup that will automatically validate and deploy the code from a code repository using a 3 steps pipeline. For the EC2 instances, a SNS service is used to notify the instances of a new build available and they will automatically retrieve the build from S3 and deploy it.
 
 ### Prerequisites:
 - AWS 
