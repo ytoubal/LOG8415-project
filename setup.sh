@@ -9,16 +9,17 @@ SECURITY_GROUP="<ENTER YOUR SECURITY GROUP>"
 
 
 #SETUP credentials to use aws cli
-# printf "[default]
-# aws_access_key_id=$ACCESS_KEY
-# aws_secret_access_key=$SECRET_KEY
-# " > $PATH_CREDS
+printf "[default]
+aws_access_key_id=$ACCESS_KEY
+aws_secret_access_key=$SECRET_KEY
+" > $PATH_CREDS
 
 #Create and configure S3 buckets
 aws s3api create-bucket --bucket $BUCKET_NAME_DEPLOY
-aws s3api create-bucket --bucket $BUCKET_NAME_ARTEFACT
+aws s3api create-bucket --bucket $BUCKET_NAME_ARTEFACT --acl public-read-write
 aws s3api put-bucket-policy --bucket $BUCKET_NAME_DEPLOY --policy file://policy_deploy.json
 aws s3api put-bucket-policy --bucket $BUCKET_NAME_ARTEFACT --policy file://policy_artefact.json
+aws s3 website s3://$BUCKET_NAME_DEPLOY/ --index-document index.html
 
 #Create new role to access S3
 ROLE_NAME="s3-access"
