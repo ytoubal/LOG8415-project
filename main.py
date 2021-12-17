@@ -1,6 +1,6 @@
 from flask import Flask, request
 import subprocess
-#import requests
+import requests
 import json
 
 app = Flask(__name__)
@@ -21,8 +21,8 @@ def sns():
     header = request.headers.get('X-Amz-Sns-Message-Type')
     print(header)
     # # subscribe to the SNS topic
-    # if header == 'SubscriptionConfirmation' and 'SubscribeURL' in js:
-    #     r = requests.get(js['SubscribeURL'])
+    if header == 'SubscriptionConfirmation' and 'SubscribeURL' in data:
+        r = requests.get(data['SubscribeURL'])
 
     if header == 'Notification':
         notification_handler(data['Message'])
