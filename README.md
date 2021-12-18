@@ -8,6 +8,7 @@ The goal of this project is to create a setup that will automatically validate a
 - AWS 
 - Python 3 
 - A security group configured with port 80 and 5000 open 
+- A repository containing the folder log8415-project (which contains the Angular app)
 
 ### Steps: 
   0. Enter the value of the required fields in the setup.sh file
